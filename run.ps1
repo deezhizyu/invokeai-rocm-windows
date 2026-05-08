@@ -1,11 +1,11 @@
-# InvokeAI + ROCm 7.1.1 Launch Script
+# InvokeAI + ROCm 7.2.1 Launch Script
 # Run this script to start InvokeAI
 
 $ErrorActionPreference = "SilentlyContinue"
 $PROJECT_ROOT = $PSScriptRoot
 
 Write-Host ""
-Write-Host "  InvokeAI + ROCm 7.1.1" -ForegroundColor Cyan
+Write-Host "  InvokeAI + ROCm 7.2.1" -ForegroundColor Cyan
 Write-Host "  =====================" -ForegroundColor Cyan
 Write-Host ""
 

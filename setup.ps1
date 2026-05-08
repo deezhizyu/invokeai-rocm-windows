@@ -1,18 +1,18 @@
-# InvokeAI + ROCm 7.1.1 Setup Script for RX 9070 XT
+# InvokeAI + ROCm 7.2.1 Setup Script for RX 9070 XT
 # Run this script ONCE to set up the environment
 # Everything is installed locally - NOTHING on C: drive
 
 # ===========================================
 # CONFIGURATION - Change these if needed
 # ===========================================
-$INVOKEAI_VERSION = "6.9.0"  # InvokeAI version to install
+$INVOKEAI_VERSION = "6.12.0"  # InvokeAI version to install
 # ===========================================
 
 $ErrorActionPreference = "Stop"
 $PROJECT_ROOT = $PSScriptRoot
 
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "InvokeAI + ROCm 7.1.1 Setup" -ForegroundColor Cyan
+Write-Host "InvokeAI + ROCm 7.2.1 Setup" -ForegroundColor Cyan
 Write-Host "Tested on AMD RX 9070 XT (RDNA4)" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
@@ -90,22 +90,22 @@ $pythonVersion = & $PYTHON_EXE --version 2>&1
 Write-Host "  Python version: $pythonVersion" -ForegroundColor Cyan
 
 # Install ROCm SDK packages (required for PyTorch)
-Write-Host "[5/10] Installing ROCm 7.1.1 SDK packages (~3.5GB)..." -ForegroundColor Green
+Write-Host "[5/10] Installing ROCm 7.2.1 SDK packages (~3.5GB)..." -ForegroundColor Green
 Write-Host "  This will take several minutes..." -ForegroundColor Yellow
 
-$rocmCore = "https://repo.radeon.com/rocm/windows/rocm-rel-7.1.1/rocm_sdk_core-0.1.dev0-py3-none-win_amd64.whl"
-$rocmDevel = "https://repo.radeon.com/rocm/windows/rocm-rel-7.1.1/rocm_sdk_devel-0.1.dev0-py3-none-win_amd64.whl"
-$rocmLibs = "https://repo.radeon.com/rocm/windows/rocm-rel-7.1.1/rocm_sdk_libraries_custom-0.1.dev0-py3-none-win_amd64.whl"
-$rocmMeta = "https://repo.radeon.com/rocm/windows/rocm-rel-7.1.1/rocm-0.1.dev0.tar.gz"
+$rocmCore = "https://repo.radeon.com/rocm/windows/rocm-rel-7.2.1/rocm_sdk_core-7.2.1-py3-none-win_amd64.whl"
+$rocmDevel = "https://repo.radeon.com/rocm/windows/rocm-rel-7.2.1/rocm_sdk_devel-7.2.1-py3-none-win_amd64.whl"
+$rocmLibs = "https://repo.radeon.com/rocm/windows/rocm-rel-7.2.1/rocm_sdk_libraries_custom-7.2.1-py3-none-win_amd64.whl"
+$rocmMeta = "https://repo.radeon.com/rocm/windows/rocm-rel-7.2.1/rocm-7.2.1.tar.gz"
 
 & $PIP_EXE install --no-cache-dir $rocmCore $rocmDevel $rocmLibs $rocmMeta
 
 # Install ROCm PyTorch wheels
-Write-Host "[6/10] Installing ROCm 7.1.1 PyTorch wheels (~725MB)..." -ForegroundColor Green
+Write-Host "[6/10] Installing ROCm 7.2.1 PyTorch wheels (~725MB)..." -ForegroundColor Green
 
-$torchWheel = "https://repo.radeon.com/rocm/windows/rocm-rel-7.1.1/torch-2.9.0+rocmsdk20251116-cp312-cp312-win_amd64.whl"
-$torchaudioWheel = "https://repo.radeon.com/rocm/windows/rocm-rel-7.1.1/torchaudio-2.9.0+rocmsdk20251116-cp312-cp312-win_amd64.whl"
-$torchvisionWheel = "https://repo.radeon.com/rocm/windows/rocm-rel-7.1.1/torchvision-0.24.0+rocmsdk20251116-cp312-cp312-win_amd64.whl"
+$torchWheel = "https://repo.radeon.com/rocm/windows/rocm-rel-7.2.1/torch-2.9.1+rocm7.2.1-cp312-cp312-win_amd64.whl"
+$torchaudioWheel = "https://repo.radeon.com/rocm/windows/rocm-rel-7.2.1/torchaudio-2.9.1+rocm7.2.1-cp312-cp312-win_amd64.whl"
+$torchvisionWheel = "https://repo.radeon.com/rocm/windows/rocm-rel-7.2.1/torchvision-0.24.1+rocm7.2.1-cp312-cp312-win_amd64.whl"
 
 & $PIP_EXE install --no-deps --cache-dir "$PROJECT_ROOT\.cache\pip" $torchWheel $torchaudioWheel $torchvisionWheel
 
