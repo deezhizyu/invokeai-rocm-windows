@@ -1,6 +1,6 @@
-# InvokeAI + ROCm 7.1.1 for AMD GPUs (Windows)
+# InvokeAI + ROCm 7.2.1 for AMD GPUs (Windows)
 
-Native Windows setup for InvokeAI with AMD ROCm 7.1.1 support.
+Native Windows setup for InvokeAI with AMD ROCm 7.2.1 support.
 
 ## Features
 
@@ -11,8 +11,8 @@ Native Windows setup for InvokeAI with AMD ROCm 7.1.1 support.
 ## Tested On
 
 - Windows 11
-- AMD RX 9070 XT (16GB VRAM)
-- AMD Driver 25.12.1 with ROCm components enabled
+- AMD RX 9070 XT (16GB VRAM); AMD Driver 25.12.1 with ROCm components enabled
+- AMD RX 7600 (8GB VRAM); AMD Driver 26.1.1 (default full install)
 
 ## Quick Start
 
@@ -49,16 +49,16 @@ Invoke-AI-Docker\
 
 ## Installed Versions
 
-- Python: 3.12
-- PyTorch: 2.9.0+rocmsdk20251116
-- ROCm SDK: 7.1.1
-- InvokeAI: 6.9.0
+- Python: 3.12.13
+- PyTorch: 2.9.1+rocm7.2.1
+- ROCm SDK: 7.2.1
+- InvokeAI: 6.12.0
 
 ## Configuration (invokeai.yaml)
 
 ```yaml
-device_working_mem_gb: 8        # Working memory for VAE decode
-force_tiled_decode: true        # Tiled VAE (required for 1024x1024 SDXL)
+device_working_mem_gb: 8 # Working memory for VAE decode
+force_tiled_decode: true # Tiled VAE (required for 1024x1024 SDXL)
 ```
 
 ## ROCm VAE Performance Fix
@@ -93,11 +93,11 @@ $env:PYTHONWARNINGS = "ignore::DeprecationWarning"
 
 Tested with waiIllustriousSDXL_v160 at 1024x1024:
 
-| Metric | Before Fix | After Fix |
-|--------|------------|-----------|
-| VAE decode | 30-35 seconds | ~5-6 seconds |
-| Denoise (22 steps) | ~5 seconds | ~5 seconds |
-| Total generation time | ~40 seconds | ~11 seconds |
+| Metric                | Before Fix    | After Fix    |
+| --------------------- | ------------- | ------------ |
+| VAE decode            | 30-35 seconds | ~5-6 seconds |
+| Denoise (22 steps)    | ~5 seconds    | ~5 seconds   |
+| Total generation time | ~40 seconds   | ~11 seconds  |
 
 ### Reference
 
